@@ -1,0 +1,231 @@
+@import url(./reset.less);
+.reset_css();
+
+body{
+	font-family: '微软雅黑'; font-size: 12px;
+}
+
+li{list-style: none;}
+
+div:after,ul:after{
+	content: '';height: 0; clear: both;
+}
+.fl{float: left;}
+.fr{float: right;}
+
+
+// 滚动条样式
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar{  
+    width: 8px;  
+    // height: 8px;
+    background-color: #F5F5F5;  
+} 
+/*定义滚动条轨道 内阴影+圆角*/ 
+::-webkit-scrollbar-track  
+{  
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);  
+    border-radius: 10px;  
+    background-color: #F5F5F5;  
+}
+/*定义滑块 内阴影+圆角*/ 
+::-webkit-scrollbar-thumb  
+{  
+    border-radius: 10px;  
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);  
+    background-color: #555;  
+} 
+
+
+// 一些公共方法
+.lh(@height){
+   line-height: @height;
+   height: @height;
+}
+.tc(){
+	text-align: center;
+}
+.cur(){
+	cursor: pointer;
+}
+.ft(@size){
+   font-size: @size;
+}
+.wh(@width,@heigth){
+	width: @width; height: @heigth;
+}
+.border(@col:#ccc){
+   border:1px solid @col;
+}
+.bor_b(@col:#ccc){
+	border-bottom:1px solid @col;
+}
+.pt(@bj){
+	padding-top: @bj;
+}
+.pb(@bj){
+	padding-bottom: @bj;
+}
+.pl(@bj){
+	padding-left: @bj;
+}
+.pr(@bj){
+	padding-right: @bj;
+}
+.mt(@bj){
+    margin-top: @bj;
+}
+.mb(@bj){
+    margin-bottom: @bj;
+}
+.ml(@bj){
+    margin-left: @bj;
+}
+.mr(@bj){
+    margin-right: @bj;
+}
+.pos_r(){
+	position: relative;
+}
+.pos_a(){
+	position: absolute;
+}
+.buttonStyle(@width, @height, @bor_radius, @bg, @col){ 
+	 border: none; outline: none; width: @width; height: @height; border-radius: @bor_radius;background: @bg; color: @col; cursor: pointer;
+}
+
+.overhide(){
+    overflow: hidden;text-overflow: ellipsis; white-space: nowrap;  
+}
+
+
+// 公共变量
+@orange:#ff9027;
+@blue:#09438d;
+@btnblue:#377bee;
+
+
+.topNav{
+	background-color: #000;color: #fff; .lh(35px); height: 35px;
+	ul.t_ul{
+		li{
+			.fl; width: 100px; .lh(35px);.tc(); color: #fff; .cur();
+		}
+		a{
+			color: #fff; width: 100%; .tc();.lh(35px); display: inline-block; 
+		}
+	}
+}
+.container{
+    width: 1200px;  margin: 0 auto;
+}
+
+.card_tb{
+    .pt(20px); height: 265px;
+	.card{
+	    .wh(260px,96px); .border(); padding: 10px 13px; background-color: #f3f5f7;.cur();.fl;.mb(15px);.mr(16px);
+	    &:nth-child(4n){
+	    	.mr(0);
+	    }
+		p{
+			.lh(22px);
+			&:first-child{
+				color: #010101;.ft(13px);
+			}
+		}
+		ul{
+			li{
+				width: 78px;.fl;.lh(22px);.ft(16px); font-weight:bold; color: @orange;
+			}
+		}
+		button{
+			.buttonStyle(60px,25px,2px,@orange,#fff);.mt(5px);
+		}
+	}
+}
+
+.port_top{
+	.lh(65px);
+	img{
+		vertical-align: -9%; .mr(10px);
+	}
+	a:nth-of-type(1){
+		color: #666;
+	}
+	a:nth-of-type(2){
+		color: @blue; .cur();
+	}
+}
+
+
+#tab{
+    .tit_tab{
+		height: 40px; .bor_b(#e4e4e4); width: 100%;.lh(40px);
+        ul{
+        	li{
+        		.lh(39px);.tc();.ft(16px);.fl; .mr(20px);.cur();
+        		&.act{
+        			color: @blue;font-weight: bold;.bor_b(@blue);.lh(39px)
+        		}
+        	}
+        }
+	}
+	.showTab{
+		.mt(20px);background-color: #fff; height: 220px; .border(#e4e4e4);
+		.hide{
+			display: none;
+		}
+	}
+}
+//select
+.selectBox{
+	.mt(20px);.border();min-height: 300px;
+}
+
+
+#indexMain{
+	.hotline{
+		.wh(236px,220px);border-right: dashed 1px #e5e5e5;.fl; 
+		.titH{
+           color: @blue; background-color: #ccdfed; text-indent: 10px; .lh(36px); .ft(14px); font-weight: bold;
+		}
+		ul{
+			padding: 10px 20px;.fl;
+			li{
+				width: 50%; .fl; .lh(30px); .tc(); .overhide();
+			}
+			a{color: #666}
+		}
+	}
+}
+
+.custom{
+	.wh(100%,320px);.border();.mt(20px); padding: 20px;
+	button{
+		.buttonStyle(125px,32px,3px,@btnblue,#fff);.fl;.ft(14px);
+	}
+}
+
+
+
+
+
+
+//自定义下拉插件
+.boxIpt{
+	height: 30px;.border(#cad4e2);box-shadow:2px 2px 5px #eaeffd inset; border-radius: 2px;.pos_r();.cur(); .fl; .mr(30px);
+	img{margin: 6px 0 0 5px; .fl;}
+	input{
+		.fl;border:none; outline: none;width: ~'calc(100% - 30px)';.lh(30px);text-indent: 5px; background: transparent;
+	}
+	ul{
+		.pos_a();left:-1px; top:30px;.border(#cad4e2);display: none; max-height: 300px; overflow: auto; 
+
+		li{
+			.lh(25px); width: ~'calc(100% - 20px)'; padding: 0 10px;
+			&:hover{
+				background-color: #00aced; color: #fff;
+			}
+		}
+	}
+}
