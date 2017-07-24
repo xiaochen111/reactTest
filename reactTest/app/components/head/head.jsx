@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import {commonStorage} from '../../tool/tool.js';
+import Dibu from '../footer/footer.jsx'
+
 
 class App extends Component {
 	
@@ -22,6 +24,8 @@ class App extends Component {
 	            <div className="container">
 					{this.props.children}
 				</div>
+
+				<Dibu/>
         	</div>
         )
     }
@@ -66,6 +70,9 @@ class Topul extends Component{
 		)
 	}
 }
+
+
+
 
 
 
