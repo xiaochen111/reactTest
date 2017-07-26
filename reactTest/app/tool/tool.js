@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import $ from 'jquery';
 
 
 let sever = 'http://192.168.1.129:8088/shining_services/';
@@ -12,6 +13,19 @@ export default (url,option,callback) => {
 	})
 }
 
+
+export function post(url,params={},callback){
+	$.ajax({
+		url:sever+url,
+		type:'post',
+		data:params,
+		dataType : 'json',
+		async : true,
+		success:function(res){
+			callback(res);
+		}
+	})
+}
 
 
 function cAppStorage() {
@@ -115,3 +129,5 @@ function cAppStorage() {
 };
 
 export let commonStorage = new cAppStorage();
+
+
