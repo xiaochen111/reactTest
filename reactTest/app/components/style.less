@@ -14,7 +14,7 @@
 		}
 	}
 }
-.container{
+.containers{
     width: 1200px;  margin: 0 auto;
 }
 
@@ -164,7 +164,7 @@
 	.lh(40px);.mt(20px);
 	ul{.fr};
 	li{
-		padding: 4px 10px; .fl; .ml(10px);background-color: @btnblue; color: #fff;.lh(20px);.cur;border-radius: 3px;
+		padding: 4px 10px; .fl; .ml(10px);background-color: @btnblue; color: #fff;.lh(26px);.cur;border-radius: 3px;
 	}
 }
 
@@ -173,7 +173,7 @@
 .li_width(){
 	.li_one{width: 150px}
 	.li_two{width: 150px}
-	.li_three{width: 150px}
+	.li_three{width: 100px}
 	.li_four{width: 150px}
 	.li_five{width: 100px}
 	.li_six{width: 100px}
@@ -192,7 +192,7 @@
 		.list{
 			 .bor_b(); 
 			ul{
-				height: 48px; padding: 10px 0;
+				height: 68px; padding: 10px 0;
 			}
 			li{
 				float: left; .lh(44px);.tc();
@@ -204,10 +204,19 @@
 			.li_width();
 			.li_ten{
 				button{
-					.buttonStyle(80px,25px,3px,@btnblue,#fff);.fl;.ft(14px);.mt(10px);
+					.buttonStyle(80px,25px,3px,@btnblue,#fff);.fl;.ft(13px);.mt(10px);
 				}
 			}
 			.li_eight,.li_nine,.li_ele{color: @orange;.ft(14px);font-weight: bold;}
 		}
+	}
+}
+
+
+// 测试
+#test{
+	.border(); height: 400px;
+	.alertBtn{
+		.buttonStyle(80px,25px,3px,@btnblue,#fff);.fl;.ft(13px);
 	}
 }

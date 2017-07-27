@@ -13,7 +13,7 @@ class App extends Component {
         return (
         	<div>
         		<div className="topNav">
-		            <div className="container">
+		            <div className="containers">
 		                <div className="fl"><Link to="/bodyBox" style={col}>logo</Link></div>
 		                <div className="fr">
 		                	<Topul/>
@@ -21,7 +21,7 @@ class App extends Component {
 		            </div>
 	            </div>
 
-	            <div className="container">
+	            <div className="containers">
 					{this.props.children}
 				</div>
 
@@ -64,6 +64,7 @@ class Topul extends Component{
 					<li><Link to="/bodyBox">菜单一</Link></li>
 					<li><Link to="/Search">菜单二</Link></li>
 					<li><Link to="/City">菜单三</Link></li>
+					<li><Link to="/Test">测试</Link></li>
 					<li><Link onClick={this.login.bind(this)}>{this.state.name}</Link></li>
 				</ul>
 			</div>

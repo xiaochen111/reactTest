@@ -6,6 +6,7 @@ import City from '../components/containers/meau2.jsx';
 import bodyBox from '../components/containers/index/main.jsx';
 import Login from '../components/containers/login/login.jsx';
 import Member from '../components/containers/member/menberCenter.jsx';
+import Test from '../components/containers/test.jsx'
 
 
 
@@ -23,6 +24,7 @@ class RouteMap extends Component {
 		                    <Route path='Search' component={Search}/>
 		                    <Route path='bodyBox' component={bodyBox}/>
 		                    <Route path='Member' component={Member}/>
+		                    <Route path='Test' component={Test}/>
 	                    </Route>
 	                    <Route path='Login' component={Login}/>
 	            </Router>
