@@ -12,20 +12,24 @@ class App extends Component {
 		}
         return (
         	<div>
-        		<div className="topNav">
-		            <div className="containers">
-		                <div className="fl"><Link to="/bodyBox" style={col}>logo</Link></div>
-		                <div className="fr">
-		                	<Topul/>
-		                </div>
-		            </div>
-	            </div>
+        		<div id='main'>  {/*id=main 这层div是为了foot一直在下面  样式问题*/}
 
-	            <div className="containers">
-					{this.props.children}
+	        		<div className="topNav">
+			            <div className="containers">
+			                <div className="fl"><Link to="/bodyBox" style={col}>logo</Link></div>
+			                <div className="fr">
+			                	<Topul/>
+			                </div>
+			            </div>
+		            </div>
+
+		            <div className="containers"> {/*中间渲染内容*/}
+						{this.props.children}
+					</div>
+
 				</div>
 
-				<Dibu/>
+				<Dibu/> {/*底部*/}
         	</div>
         )
     }

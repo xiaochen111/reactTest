@@ -3,6 +3,9 @@ import {Crumbs} from '../components/static.jsx';
 import SweetAlert from 'sweetalert-react'; 
 import 'sweetalert/dist/sweetalert.css';
 import { Button,Pagination,Modal,OverlayTrigger,Tooltip} from 'react-bootstrap';
+import Timepicker from '../components/time.jsx';
+
+
 
 
 class Test extends Component{
@@ -51,10 +54,6 @@ class Test extends Component{
 						<Button bsStyle="default">Holy guacamole!</Button>
 					</OverlayTrigger>
 
-					<OverlayTrigger placement="right" overlay={tooltip} >
-						<button className="alertBtn" onClick={this.btnClick.bind(this)} style={{marginRop:"20px"}}>Alert1</button>
-					</OverlayTrigger>
-					
 
 					<div>
 						<Pagination
@@ -64,20 +63,24 @@ class Test extends Component{
 				          onSelect={this.handleSelect.bind(this)} />
 					</div>
 
+					<Timepicker />
 
-					<div>
-						<Modal show={this.state.showModal} onHide={this.close.bind(this)}>
-				          <Modal.Header closeButton>
-				            <Modal.Title>Modal heading</Modal.Title>
-				          </Modal.Header>
-				          <Modal.Body>
-				            <div>我是主题内容！！！！</div>
-				          </Modal.Body>
-				          <Modal.Footer>
-				            <Button onClick={this.close.bind(this)}>Close</Button>
-				          </Modal.Footer>
-				        </Modal>
-					</div>
+					
+				</div>
+
+				{/*模态框*/}
+				<div>
+					<Modal show={this.state.showModal} onHide={this.close.bind(this)}>
+			          <Modal.Header closeButton>
+			            <Modal.Title>Modal heading</Modal.Title>
+			          </Modal.Header>
+			          <Modal.Body>
+			            <div>我是主题内容！！！！</div>
+			          </Modal.Body>
+			          <Modal.Footer>
+			            <Button onClick={this.close.bind(this)}>Close</Button>
+			          </Modal.Footer>
+			        </Modal>
 				</div>
 
 

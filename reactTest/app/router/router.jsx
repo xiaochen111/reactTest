@@ -10,9 +10,6 @@ import Test from '../components/containers/test.jsx'
 
 
 
-
-
-
 class RouteMap extends Component {
     render() {
         return (

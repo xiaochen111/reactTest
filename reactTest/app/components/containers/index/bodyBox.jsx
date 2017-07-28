@@ -17,11 +17,11 @@ class Contbox extends Component {
     	//let card = new Array(8);
     	//card.fill(<Card />);
     	let card = [
-			{name:"上海1",href:"#/City"},{name:"上海2",href:"http://www.baidu.com"},{name:"上海3",href:"http://www.baidu.com"},{name:"上海4",href:"http://www.baidu.com"},
-			{name:"上海5",href:"http://www.baidu.com"},{name:"上海6",href:"http://www.baidu.com"},{name:"上海7",href:"http://www.baidu.com"},{name:"上海8",href:"http://www.baidu.com"}
+			{name:"上海1",href:"#/Search"},{name:"上海2",href:"#/Search"},{name:"上海3",href:"#/Search"},{name:"上海4",href:"#/Search"},
+			{name:"上海5",href:"#/Search"},{name:"上海6",href:"#/Search"},{name:"上海7",href:"#/Search"},{name:"上海8",href:"#/Search"}
 		]
         return (
-        	<div className="container card_tb">
+        	<div className="containerss card_tb">
         		{
         			card.map((item,index)=><div className="card" key={index}><Card name={item.name} href={item.href}/></div>)
         		}
@@ -38,7 +38,7 @@ class Card extends Component{
 		// console.log(this)
 		// let btn = this.refs.btn;  //ref 此处可以进行dom操作
 		// let url = btn.href;
-		window.open(url);
+		location.hash=url;
 	}
 	
 	render(){

@@ -2,6 +2,15 @@
 @import url(./public.less);
 .reset_css();
 
+html,body{height: 100%;}
+
+#content {  
+	min-height:100%;  
+	position: relative;  
+}  
+#main {   
+    padding-bottom: 120px;    
+}  
 
 .topNav{
 	background-color: #000;color: #fff; .lh(35px); height: 35px;
@@ -21,7 +30,10 @@
 .card_tb{
     .pt(20px); height: 265px;
 	.card{
-	    .wh(260px,96px); .border(); padding: 10px 13px; background-color: #f3f5f7;.cur();.fl;.mb(15px);.mr(16px);
+		&:hover{
+			background-color: #fff;box-shadow: 0 0 20px #e4e4e4; 
+		}
+	    .wh(286px,116px); .border(); padding: 10px 13px; background-color: #f3f5f7;.cur();.fl;.mb(15px);.mr(18px);transition:1s;
 	    &:nth-child(4n){
 	    	.mr(0);
 	    }
@@ -58,7 +70,7 @@
 
 #tab{
     .tit_tab{
-		height: 40px; .bor_b(#e4e4e4); width: 100%;.lh(40px);
+		height: 40px; .bor_b(#e4e4e4); width: 100%;.lh(40px);.mt(16px);
         ul{
         	li{
         		.lh(39px);.tc();.ft(16px);.fl; .mr(20px);.cur();
@@ -70,7 +82,7 @@
 	}
 	.showTab{
 		.mt(20px);background-color: #fff; height: 220px; .border(#e4e4e4);
-		.hide{
+		.hide_none{
 			display: none;
 		}
 	}
@@ -117,10 +129,10 @@
 		.fl;border:none; outline: none;width: ~'calc(100% - 30px)';.lh(30px);text-indent: 5px; background: transparent;
 	}
 	ul{
-		.pos_a();left:-1px; top:30px;.border(#cad4e2);display: none; max-height: 300px; overflow: auto;  background-color: #fff;
+		.pos_a();left:-1px; top:28px;.border(#cad4e2);display: none; max-height: 300px; overflow: auto;  background-color: #fff;
 
 		li{
-			.lh(25px); width: ~'calc(100% - 20px)'; padding: 0 10px;
+			.lh(25px); width: 100%; padding: 0 10px;
 			&:hover{
 				background-color: #00aced; color: #fff;
 			}
@@ -145,26 +157,26 @@
 		}
 	}
 	.btn_login{
-		padding: 30px 20px 20px; .tc(); width:  ~'calc(100% - 40px)';
+		padding: 30px 20px 20px; .tc(); width:  100%;
 		a{
 			.buttonStyle(100%,32px,3px,@btnblue,#fff);.ft(14px); display: inline-block;.lh(32px);
 		}
 	}
 	.btns_tt{
-		width:  ~'calc(100% - 40px)';.lh(30px); padding: 0 20px;
+		width:  100%;.lh(30px); padding: 0 20px;
 	}
 }
 
 
 #foot{
-	height: 100px; .mt(30px;);
+	height: 100px; background-color: #000; color: #fff;width: 100%; position: absolute; bottom: 0;   
 }
 
 .page{
 	.lh(40px);.mt(20px);
 	ul{.fr};
 	li{
-		padding: 4px 10px; .fl; .ml(10px);background-color: @btnblue; color: #fff;.lh(26px);.cur;border-radius: 3px;
+		padding: 4px 10px; .fl; .ml(10px);background-color: @btnblue; color: #fff;.cur;border-radius: 3px; height: 26px; line-height: 20px;
 	}
 }
 

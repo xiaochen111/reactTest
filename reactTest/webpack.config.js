@@ -19,8 +19,13 @@ module.exports = {
                     }, 
                     { test: /\.css$/, loader: 'style-loader!css-loader' },
                     { test: /\.less$/, loader: 'style-loader!css-loader!less-loader' },
-                    { test: /\.(png|jpg)$/,loader: 'url-loader?limit=8192'},
-                    { test: /\.json$/,use: 'json-loader'}
+                    { test: /\.(png|PNG|jpg|JPG|jpeg|JPEG|gif|GIF)$/,loader: 'url-loader?limit=8192'},
+                    { test: /\.json$/,use: 'json-loader'},
+
+                    { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader" },  //配置bootstrap
+                    { test: /\.(woff|woff2)$/, loader:"url-loader?prefix=font/&limit=5000" },
+                    { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=10000&mimetype=application/octet-stream" },
+                    { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=10000&mimetype=image/svg+xml" }
                 ]
     },
 

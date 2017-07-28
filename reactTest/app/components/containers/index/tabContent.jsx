@@ -40,8 +40,8 @@ class Tab extends Component{
 					<div className="">
 						<Tabone/>
 					</div>
-					<div className="hide">2</div>
-					<div className="hide">3</div>
+					<div className="hide_none">2</div>
+					<div className="hide_none">3</div>
 				</div>
 
 			</div>
