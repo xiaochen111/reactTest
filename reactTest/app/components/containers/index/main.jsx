@@ -9,6 +9,7 @@ import {commonStorage} from '../../../tool/tool.js';
 class Mainindex extends Component{
 	componentDidMount(){
 		commonStorage.setValueSession("first","first");
+		document.title = '首页';
 	}
 	render(){
 		let first = commonStorage.getValueSession("first");
@@ -16,7 +17,7 @@ class Mainindex extends Component{
 			<div id="indexMain">
 				<Contbox/>
 				<Tab/>
-				{!first?<Model/>:null}
+				{!first?<Model show={true}/>:null}
 			</div>
 		)
 	}

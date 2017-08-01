@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
-import ajax from '../../tool/tool.js';
+import ajax,{post} from '../../tool/tool.js';
 import {Crumbs} from '../components/static.jsx';
+import Model from '../components/model.jsx';
+import { Button,Pagination,Modal,OverlayTrigger,Tooltip} from 'react-bootstrap';
 import 'react-select/dist/react-select.css';
 
 class City extends Component {
@@ -12,9 +14,10 @@ class City extends Component {
 	        country: 'AU',
 			disabled: false,
 			searchable: this.props.searchable,
-			selectValue: 'new-south-wales',
+			selectValue: {label:"阿波"},
 			clearable: true,
-			options:[]
+			options:[],
+			model:false
 	     }
 	 }
 
@@ -26,14 +29,34 @@ class City extends Component {
 		});
 	}
 
-	componentDidMount(){
-		var that = this;
-		ajax("drop/queryportlist","",function(res){
-			res.forEach((item)=>item.label = item.nameCn);
-			that.setState({
-				options:res
-			})
+	open(){
+		this.setState({
+			model:true
+		},()=>{
+			console.log(this.state)
 		})
+	}
+	getOptions(value,callback){
+		console.log(value)
+		post("drop/queryportlist",{nameCn:value},function(res){
+				console.log(res)
+				res.forEach((item)=>item.label = item.nameCn);
+				callback(null, {
+			    options:res,
+			      // CAREFUL! Only set this to true when there are no more options,
+			      // or more specific queries will not be sent to the server.
+			      complete: true
+			    });
+		})
+	}
+	componentDidMount(){
+		// var that = this;
+		// ajax("drop/queryportlist","",function(res){
+		// 	res.forEach((item)=>item.label = item.nameCn);
+		// 	that.setState({
+		// 		options:res
+		// 	})
+		// })
 	}
 
     render() {
@@ -43,13 +66,18 @@ class City extends Component {
                 <h1>city</h1>
 
                 <div className="selectBox">
-	            	<Select
-					  autofocus
+	            	<Select.Async
+					  // autofocus
 					  value={this.state.selectValue}
 					  options={this.state.options}
-					  onChange={this.updateValue.bind(this)}
-					/>
+					  loadOptions={this.getOptions.bind(this)}
+					  onChange={this.updateValue.bind(this)}/>
+
+
+					<Button onClick={this.open.bind(this)} >模态框</Button>
+	            	<Model show={this.state.model}/>
 	            </div>
+
 
             </div>
         )

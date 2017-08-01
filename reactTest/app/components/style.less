@@ -44,8 +44,16 @@ html,body{height: 100%;}
 			}
 		}
 		ul{
+			.fl;
 			li{
 				width: 78px;.fl;.lh(22px);.ft(16px); font-weight:bold; color: @orange;
+			}
+		}
+		div.btnUl{
+			.pos_r();height: 30px; .mt(25px);width: 60px;
+			ul{
+				.pos_a();left: 60px;width: 60px; top:5px;display: none;
+				ol{.lh(25px);.tc();background-color: @orange; color: #fff;border-radius: 2px;}
 			}
 		}
 		button{
@@ -173,11 +181,7 @@ html,body{height: 100%;}
 }
 
 .page{
-	.lh(40px);.mt(20px);
-	ul{.fr};
-	li{
-		padding: 4px 10px; .fl; .ml(10px);background-color: @btnblue; color: #fff;.cur;border-radius: 3px; height: 26px; line-height: 20px;
-	}
+	text-align: right;
 }
 
 

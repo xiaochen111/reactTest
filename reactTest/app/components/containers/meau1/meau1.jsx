@@ -1,6 +1,6 @@
 import React from 'react';
 import ajax,{post} from '../../../tool/tool';
-import {Crumbs,Page,Loading,Choice} from '../../components/static.jsx';
+import {Crumbs,Loading,Choice,Page} from '../../components/static.jsx';
 import Table from './list.jsx'
 import $ from 'jquery';
 
@@ -9,13 +9,18 @@ class Search extends React.Component {
 	constructor(props){
 	     super(props);
 	     this.state={
-	        list:[]
+	        list:[],
+	        url:'freightfclweb/queryPage',
+	        parmes:{
+	        	pageNo:1,
+	        	startPortId:"",
+	        	shippingId:"",
+	        }
 	     }
 	 }
  	componentDidMount(){
 		let that = this;
-		let parmes = {pageNo:1}; //获取参数集合；
-		let totalPage = 0; //总页数
+		//let parmes = {pageNo:1}; //获取参数集合；
 
 		listLoad();//请求列表数据
 		
@@ -32,28 +37,44 @@ class Search extends React.Component {
 				var id = $(this)["0"].id;
 				switch(index){
 					case 0:
-					    parmes.startPortId=id;
+					    // console.log(that.state)
+					    // that.setState({
+					    // 	parmes:{
+					    // 		startPortId:id
+					    // 	}
+					    // },()=>console.log(that.state))
+						 that.setState(Object.assign(that.state.parmes, that.state.parmes, {startPortId: id}))
 					    break;
 					case 1:
-					    parmes.shippingId=id;
+					    // that.setState({
+					    // 	parmes:{
+					    // 		shippingId:id
+					    // 	}
+					    // })
+						that.setState(Object.assign(that.state.parmes, that.state.parmes, {shippingId: id}))
 					    break;
 				}
-				console.log(parmes)
 			})
 		});
 
-		//翻页
-		$(".page").find("li").click(function(){
-			var index = $(this).index();
-			if(index===1){
-				parmes.pageNo++;
-				if(parmes.pageNo>=totalPage)parmes.pageNo=totalPage;
-			}else if(index===0){
-				parmes.pageNo--;
-				if(parmes.pageNo<=0)parmes.pageNo=1;
-			}
-			listLoad(parmes)
-		})
+		$(".boxIpt").each(function(index, item) {
+			$(item).on("keyup","input",function(){
+				switch(index){
+					case 0:
+						if(!$(this).val()){
+							that.setState(Object.assign(that.state.parmes, that.state.parmes, {startPortId: ""}))
+						}
+					    break;
+					case 1:
+					    if(!$(this).val()){
+					    	that.setState(Object.assign(that.state.parmes, that.state.parmes, {shippingId: ""}))
+					    }
+					    break;
+				}
+			})
+		});
+
+		
 
 		//搜索
 		$("#serach").click(function(){
@@ -62,18 +83,26 @@ class Search extends React.Component {
 
 		function listLoad(){
 			$("#loadingToast").show()
-			post("freightfclweb/queryPage",parmes,function(res){ //请求列表数据
+			post(that.state.url,that.state.parmes,function(res){ //请求列表数据
 				$("#loadingToast").hide();
-				totalPage=res.totalPage;
 				console.log(res);
 				that.setState({
-					list:res.rows
+					list:res.rows,
 				})
 			})
 		}
 	}
 
-	
+	page(res,pageNum){
+		this.setState({
+			list:res,
+		})
+		this.setState(Object.assign(this.state.parmes, this.state.parmes, {pageNo: pageNum}))
+	}
+	 componentWillReceiveProps(newProps) {
+	    console.log(newProps);
+	    
+	 }
     render() {
         return (
             <div>
@@ -100,7 +129,7 @@ class Search extends React.Component {
                 	<button id="serach">查询</button>
                 	<div className="clearfix"></div>
                 	<Table arr={this.state.list}/> 
-                	<div><Page/></div>
+                	<div><Page url={this.state.url} parmes={this.state.parmes} page={this.page.bind(this)}/></div>
                 </div>
                 <Loading />
             </div>

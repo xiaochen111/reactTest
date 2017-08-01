@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {post} from '../../tool/tool';
 import $ from 'jquery';
+import { Button,Pagination,Modal,OverlayTrigger,Tooltip} from 'react-bootstrap';
 
 // 面包屑导航
 class Crumbs extends Component {
@@ -15,13 +16,62 @@ class Crumbs extends Component {
 
 //分页
 class Page extends Component {
+	constructor(props){
+	     super(props);
+	     console.log(props)
+	     this.state={
+	        activePage: 1,
+	        url:props.url,
+	        parmes:props.parmes,
+	        page:"",
+	     }
+	}
+	handleSelect(eventKey) {
+		console.log(eventKey)
+		let that = this;
+	    this.setState({
+	      activePage: eventKey
+	    });
+	    this.setState({
+	    	parmes:{
+	    		pageNo:eventKey
+	    	}
+	    },()=>{
+	    	$("#loadingToast").show()
+		    post(this.state.url, this.state.parmes ,function(res){
+		    	console.log(res)
+		    	$("#loadingToast").hide();
+		    	that.props.page(res.rows,eventKey)  //通过props调用父级的方法 改变父级的state
+		    })
+	    })
+	}
+	componentDidMount(){
+		
+	}
+	componentWillReceiveProps(newProps) {
+	    let that = this;
+		console.log(newProps.parmes)
+		post(this.state.url,newProps.parmes,function(res){
+			console.log(res)
+			that.setState({
+				page:parseInt(res.totalPage)
+			})
+		})
+	  }
 	render(){
 		return(
 			<div className="page">
-				<ul>
-					<li>上一页</li>
-					<li>下一页</li>
-				</ul>
+			    <Pagination
+			        prev
+			        next
+			        first
+			        last
+			        ellipsis
+			        boundaryLinks
+			        items={this.state.page}
+			        maxButtons={5}
+			        activePage={this.state.activePage}
+			        onSelect={this.handleSelect.bind(this)} />
 			</div>
 		)
 	}
@@ -55,7 +105,7 @@ class Choice extends React.Component{
 		super(props);
 		this.state={
 			arr:[],
-			flag:true
+			url:props.url,
 		}
 	}
 
@@ -68,41 +118,37 @@ class Choice extends React.Component{
 		$("body").click(function(){
 			$(".boxIpt").children("ul").slideUp();
 		})
+
+
+		// 列表初始化加载
+		let url = this.state.url;
+		let that = this;
+		post(url,"",function(res){
+		 	console.log(res)
+		 	that.setState({
+				arr:res
+			})
+		});
 	}
 
-	getLoad(url){  //模糊搜索
+	getLoad(){  //模糊搜索
 		 let name = this.refs.val.value;
 		 let parmes = {};
 		 parmes.nameCn = name;
 		 let that = this;
-	 	post(url,parmes,function(res){
+	 	 post(this.state.url,parmes,function(res){
 		 	console.log(res)
 		 	that.setState({
 				arr:res
 			})
 		 });
-	}	
-	load_li(url){ //初始化加载下拉列表
-		let that = this;
-		console.log("-----------")
-		if(this.state.flag){ //目的加载时为了只加载一次
-			post(url,"",function(res){
-			 	that.setState({
-					arr:res,
-					flag:false
-				})
-			});
-		}
 	}
-	
+
 	render(){
-		let url = this.props.url;
 		return (
 			<div className="boxIpt" style={{width:this.props.width}}>
-				{/* 不知道为什么onload加载时  load_li 方法加载了多次 */}
-				<div onLoad={this.load_li.bind(this,url)()}></div>  
 				<img src={require('../../images/qi.jpg')} />
-				<input type="text" ref="val" placeholder={this.props.placeholder} onKeyUp={this.getLoad.bind(this,url)}/>
+				<input type="text" ref="val" placeholder={this.props.placeholder} onKeyUp={this.getLoad.bind(this)}/>
 				<ul style={{width:this.props.ulWidth}}>
 					{
 						this.state.arr.map( (item,index)=><li key={index} id={item[this.props.id]} ><span className="fl">{item[this.props.name1]}</span><span className="fr">{item[this.props.name2]}</span></li> )

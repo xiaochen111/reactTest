@@ -7,6 +7,8 @@ import 'sweetalert/dist/sweetalert.css';
 
 
 
+
+
 class Login extends Component{
 	constructor(props){
 	     super(props);
@@ -17,6 +19,7 @@ class Login extends Component{
 	     }
 	}
 	componentDidMount(){
+		document.title = '登录';
 		$('#login').click(()=>{
 			let username = $('#username').val();
 			let password = $('#password').val();

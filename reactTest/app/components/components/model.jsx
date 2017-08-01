@@ -4,15 +4,22 @@ import { Button,Pagination,Modal,OverlayTrigger,Tooltip} from 'react-bootstrap';
 class Model extends Component{
 	constructor(props){
 	     super(props);
+	     console.log(props)
 	     this.state={
-	        showModal: true,
+	        showModal: props.show,
 	     }
 	}
 	close() {
-	    this.setState({ showModal: false });
+	    this.setState({ showModal: !this.props.show });
 	}
 	open() {
-	    this.setState({ showModal: true });
+	    this.setState({ showModal: this.props.show });
+	}
+	componentWillReceiveProps(newProps) {  //当挂载的组件接收到新的props时被调用。此方法应该被用于比较this.props 和 nextProps以用于使用this.setState()执行状态转换。
+	    console.log(newProps, this.state.showModal);
+	    this.setState({
+	    	showModal:newProps.show
+	    })
 	}
 	render(){
 		return (

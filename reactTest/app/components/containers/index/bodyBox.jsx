@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import ajax from '../../../tool/tool'
+import ajax from '../../../tool/tool';
+import $ from 'jquery';
+
 
 
 
@@ -10,7 +12,12 @@ class Contbox extends Component {
 			console.log(data);
 		})
 
-		console.log("加载完了")
+		$(".btnUl").hover(function(){
+			$(this).children('ul').show()
+		},function(){
+			$(this).children('ul').hide()
+		})
+	
 	}
     render() {
     	let arr = ['你好','hello','阿波'];
@@ -40,7 +47,6 @@ class Card extends Component{
 		// let url = btn.href;
 		location.hash=url;
 	}
-	
 	render(){
 		return(
 			<div>
@@ -51,7 +57,13 @@ class Card extends Component{
 					<li>$6000</li>
 					<li>$6000</li>
 				</ul>
-				<button ref="btn" href={this.props.href} onClick={this.btnClick.bind(this,this.props.href)}>咨询</button>
+				<div className="btnUl">
+					<button ref="btn" href={this.props.href} onClick={this.btnClick.bind(this,this.props.href)}>咨询</button>
+					<ul>
+						<ol>张三</ol>
+						<ol>张三</ol>
+					</ul>
+				</div>
 			</div>
 		)
 	}
