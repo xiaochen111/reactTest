@@ -3,6 +3,10 @@ import Contbox from './bodyBox.jsx';
 import Tab from './tabContent.jsx';
 import Model from '../../components/model.jsx';
 import {commonStorage} from '../../../tool/tool.js';
+import Banner from './banner_ser.jsx';
+
+
+import './index.less';
 
 
 
@@ -15,6 +19,7 @@ class Mainindex extends Component{
 		let first = commonStorage.getValueSession("first");
 		return (
 			<div id="indexMain">
+				<Banner/>
 				<Contbox/>
 				<Tab/>
 				{!first?<Model show={true}/>:null}

@@ -1,8 +1,11 @@
 import React from 'react';
 import ajax,{post} from '../../../tool/tool';
-import {Crumbs,Loading,Choice,Page} from '../../components/static.jsx';
+import {Crumbs,Loading,Choice,Page,parmesObj} from '../../components/static.jsx';
 import Table from './list.jsx'
 import $ from 'jquery';
+
+import DatePicker from 'antd/lib/date-picker';
+import 'antd/lib/date-picker/style/css';
 
 
 class Search extends React.Component {
@@ -15,13 +18,20 @@ class Search extends React.Component {
 	        	pageNo:1,
 	        	startPortId:"",
 	        	shippingId:"",
-	        }
+	        },
+	        imgNo:false
 	     }
 	 }
  	componentDidMount(){
-		let that = this;
-		//let parmes = {pageNo:1}; //获取参数集合；
+ 		let that = this;
+ 		let parmesobj = parmesObj();
+ 		that.setState(Object.assign(that.state.parmes, that.state.parmes, {startPortId: parmesobj.startPortId,shippingId:parmesobj.shippingId}))
 
+
+ 		console.log(that.state.parmes)
+
+
+ 		document.title = '菜单二';
 		listLoad();//请求列表数据
 		
 
@@ -31,26 +41,15 @@ class Search extends React.Component {
 			$(this).next("ul").slideToggle();
 		})
 
-		
+		//搜索框操作======================================================================================================================================
 		$(".boxIpt").each(function(index, item) {
 			$(item).on("click","li",function(){
 				var id = $(this)["0"].id;
 				switch(index){
 					case 0:
-					    // console.log(that.state)
-					    // that.setState({
-					    // 	parmes:{
-					    // 		startPortId:id
-					    // 	}
-					    // },()=>console.log(that.state))
-						 that.setState(Object.assign(that.state.parmes, that.state.parmes, {startPortId: id}))
+						that.setState(Object.assign(that.state.parmes, that.state.parmes, {startPortId: id}))
 					    break;
 					case 1:
-					    // that.setState({
-					    // 	parmes:{
-					    // 		shippingId:id
-					    // 	}
-					    // })
 						that.setState(Object.assign(that.state.parmes, that.state.parmes, {shippingId: id}))
 					    break;
 				}
@@ -73,22 +72,27 @@ class Search extends React.Component {
 				}
 			})
 		});
-
 		
-
 		//搜索
 		$("#serach").click(function(){
 			listLoad();
 		})
+		//搜索框操作================================================================================================================================================
+
 
 		function listLoad(){
 			$("#loadingToast").show()
 			post(that.state.url,that.state.parmes,function(res){ //请求列表数据
 				$("#loadingToast").hide();
-				console.log(res);
+				if(!res.rows.length){
+					that.setState({
+						imgNo:true,
+					})
+				}
 				that.setState({
 					list:res.rows,
 				})
+
 			})
 		}
 	}
@@ -99,6 +103,11 @@ class Search extends React.Component {
 		})
 		this.setState(Object.assign(this.state.parmes, this.state.parmes, {pageNo: pageNum}))
 	}
+
+	date(date,dateString){
+		console.log(dateString)
+	}
+
 	 componentWillReceiveProps(newProps) {
 	    console.log(newProps);
 	    
@@ -126,10 +135,15 @@ class Search extends React.Component {
                 	placeholder="船公司" 
                 	url="drop/queryshippinglist" />
 
+
+                	<DatePicker onChange={this.date.bind(this)}/>
+
                 	<button id="serach">查询</button>
                 	<div className="clearfix"></div>
-                	<Table arr={this.state.list}/> 
-                	<div><Page url={this.state.url} parmes={this.state.parmes} page={this.page.bind(this)}/></div>
+                	<Table arr={this.state.list} imgNo={this.state.imgNo}/> 
+                	<div>
+                		<Page url={this.state.url} parmes={this.state.parmes} page={this.page.bind(this)}/>
+                	</div>
                 </div>
                 <Loading />
             </div>

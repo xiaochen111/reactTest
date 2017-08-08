@@ -8,9 +8,9 @@ import $ from 'jquery';
 class Contbox extends Component {
 	componentDidMount(){
 		
-		ajax("freightlclweb/queryPage","",function(data){
-			console.log(data);
-		})
+		// ajax("freightlclweb/queryPage","",function(data){
+		// 	console.log(data);
+		// })
 
 		$(".btnUl").hover(function(){
 			$(this).children('ul').show()

@@ -1,6 +1,9 @@
 import React from 'react';
 import {post} from '../../../tool/tool.js'; 
 
+import { Tooltip } from 'antd';
+import 'antd/dist/antd.css';
+
 
 class Table extends React.Component{
 	listClick(obj){
@@ -8,6 +11,7 @@ class Table extends React.Component{
 	}
 	render(){
 		let arr = this.props.arr; //父组件向子组件传值
+		let imgNos = this.props.imgNo;
 		return(
 			<div className="table_box">
 				<div className="thead">
@@ -49,6 +53,9 @@ class Table extends React.Component{
 							listClick={this.listClick.bind(this,item)} />
 						)
 					}
+					{
+						!arr.length&&imgNos ? <img src={require('../../../images/nofind.jpg')} /> : null
+					}
 				</div>
 			</div>
 		)
@@ -78,7 +85,10 @@ class List extends React.Component{
 					</li>
 					<li className="li_four">
 						<p>
-							<span>{this.props.portEndNameEn}({this.props.portEndName})</span><br/><span>{this.props.portEndWharf || '-'}</span>
+							<Tooltip title={`${this.props.portEndNameEn}(${this.props.portEndName})`} placement="top">
+							    <span>{this.props.portEndNameEn}({this.props.portEndName})</span>
+							 </Tooltip>
+							<br/><span>{this.props.portEndWharf || '-'}</span>
 						</p>
 					</li>
 					<li className="li_five">

@@ -120,7 +120,7 @@ html,body{height: 100%;}
 .custom{
 	.wh(100%,auto);.border();.mt(20px); padding: 20px;
 	button{
-		.buttonStyle(125px,32px,3px,@btnblue,#fff);.fl;.ft(14px);
+		.buttonStyle(125px,32px,3px,@btnblue,#fff);.ft(14px); .ml(30px);
 	}
 }
 
@@ -137,7 +137,7 @@ html,body{height: 100%;}
 		.fl;border:none; outline: none;width: ~'calc(100% - 30px)';.lh(30px);text-indent: 5px; background: transparent;
 	}
 	ul{
-		.pos_a();left:-1px; top:28px;.border(#cad4e2);display: none; max-height: 300px; overflow: auto;  background-color: #fff;
+		.pos_a();left:-1px; top:28px;.border(#cad4e2);display: none; max-height: 300px; overflow: auto;  background-color: #fff;z-index: 99;
 
 		li{
 			.lh(25px); width: 100%; padding: 0 10px;
@@ -215,7 +215,7 @@ html,body{height: 100%;}
 				p{
 					display: inline-block;vertical-align: middle;line-height: 22px;width: 100%;
 				}
-				span{display: inline-block;width: 100%; .overhide();}
+				span{display: inline-block;width: 100%; .overhide(); .border()}
 			}
 			.li_width();
 			.li_ten{
@@ -236,3 +236,20 @@ html,body{height: 100%;}
 		.buttonStyle(80px,25px,3px,@btnblue,#fff);.fl;.ft(13px);
 	}
 }
+
+
+
+//会员中心
+.leftnav{
+	width: 220px; .fl;
+	ul{
+		width: 220px; .border();
+		li{
+			.lh(40px);.bor_b(); text-indent:20px;
+		}
+		a{
+			color:#333;
+		}
+	}
+}
+.men_content{width: 950px;.border(); .fl; .ml(30px);min-height: 500px;}

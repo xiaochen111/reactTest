@@ -5,6 +5,11 @@ import 'sweetalert/dist/sweetalert.css';
 import { Button,Pagination,Modal,OverlayTrigger,Tooltip} from 'react-bootstrap';
 import Timepicker from '../components/time.jsx';
 
+import DatePicker from 'antd/lib/date-picker';
+import 'antd/lib/date-picker/style/css';
+
+
+
 
 
 
@@ -33,6 +38,12 @@ class Test extends Component{
 	}
 	open() {
 	    this.setState({ showModal: true });
+	}
+	componentDidMount(){
+ 		document.title = '测试';
+	}
+	date(date,dateString){
+		console.log(dateString)
 	}
 	render(){
 		const tooltip = (
@@ -63,7 +74,8 @@ class Test extends Component{
 				          onSelect={this.handleSelect.bind(this)} />
 					</div>
 
-					<Timepicker />
+
+					<DatePicker onChange={this.date.bind(this)}/>
 
 					
 				</div>

@@ -3,8 +3,13 @@ import Select from 'react-select';
 import ajax,{post} from '../../tool/tool.js';
 import {Crumbs} from '../components/static.jsx';
 import Model from '../components/model.jsx';
-import { Button,Pagination,Modal,OverlayTrigger,Tooltip} from 'react-bootstrap';
+import { Button,Pagination,Modal,OverlayTrigger} from 'react-bootstrap';
 import 'react-select/dist/react-select.css';
+
+
+import { Tooltip } from 'antd';
+import 'antd/dist/antd.css';
+
 
 class City extends Component {
 
@@ -50,6 +55,7 @@ class City extends Component {
 		})
 	}
 	componentDidMount(){
+		document.title = '菜单三';
 		// var that = this;
 		// ajax("drop/queryportlist","",function(res){
 		// 	res.forEach((item)=>item.label = item.nameCn);
@@ -65,6 +71,7 @@ class City extends Component {
             	<Crumbs name="city"/>
                 <h1>city</h1>
 
+            {/*
                 <div className="selectBox">
 	            	<Select.Async
 					  // autofocus
@@ -77,7 +84,12 @@ class City extends Component {
 					<Button onClick={this.open.bind(this)} >模态框</Button>
 	            	<Model show={this.state.model}/>
 	            </div>
-
+			*/}
+				<div className="selectBox">
+		            <Tooltip title='Tooltip will show when mouse enter.' placement="topLeft">
+					    <span>Tooltip will show when mouse enter.</span>
+					</Tooltip>
+				</div>
 
             </div>
         )

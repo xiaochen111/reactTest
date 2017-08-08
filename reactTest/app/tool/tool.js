@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import $ from 'jquery';
+import axios from 'axios';
 
 
 let sever = 'http://192.168.1.129:8088/shining_services/';
@@ -21,6 +22,9 @@ export function post(url,params={},callback){
 		data:params,
 		dataType : 'json',
 		async : true,
+		beforeSend:function(XHR){
+			XHR.setRequestHeader('Authorization', "author");
+		},
 		success:function(res){
 			callback(res);
 		}

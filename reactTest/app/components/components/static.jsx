@@ -24,22 +24,19 @@ class Page extends Component {
 	        url:props.url,
 	        parmes:props.parmes,
 	        page:"",
+	        rows:[]
 	     }
 	}
 	handleSelect(eventKey) {
-		console.log(eventKey)
 		let that = this;
 	    this.setState({
 	      activePage: eventKey
 	    });
-	    this.setState({
-	    	parmes:{
-	    		pageNo:eventKey
-	    	}
-	    },()=>{
+	    this.setState(
+	    Object.assign(that.state.parmes, that.state.parmes, {pageNo: eventKey})
+	    ,()=>{
 	    	$("#loadingToast").show()
 		    post(this.state.url, this.state.parmes ,function(res){
-		    	console.log(res)
 		    	$("#loadingToast").hide();
 		    	that.props.page(res.rows,eventKey)  //通过props调用父级的方法 改变父级的state
 		    })
@@ -52,26 +49,30 @@ class Page extends Component {
 	    let that = this;
 		console.log(newProps.parmes)
 		post(this.state.url,newProps.parmes,function(res){
-			console.log(res)
 			that.setState({
-				page:parseInt(res.totalPage)
+				page:res.totalPage,
+				rows:res.rows
 			})
 		})
 	  }
 	render(){
+		let len = this.state.rows.length;
 		return(
-			<div className="page">
-			    <Pagination
-			        prev
-			        next
-			        first
-			        last
-			        ellipsis
-			        boundaryLinks
-			        items={this.state.page}
-			        maxButtons={5}
-			        activePage={this.state.activePage}
-			        onSelect={this.handleSelect.bind(this)} />
+		    <div className="page">
+		    	{
+		    		len===0?null
+		    		:<Pagination
+				        prev
+				        next
+				        first
+				        last
+				        ellipsis
+				        boundaryLinks
+				        items={parseInt(this.state.page)}
+				        maxButtons={5}
+				        activePage={this.state.activePage}
+				        onSelect={this.handleSelect.bind(this)} />
+				}
 			</div>
 		)
 	}
@@ -112,8 +113,10 @@ class Choice extends React.Component{
 	componentDidMount(){
 		$(".boxIpt").on("click","li",function(){
 			var val = $(this).find('.fl').html();
+			var id = $(this)["0"].id;
 			$(this).parent().slideUp();
-			$(this).parents().siblings("input").val(val);
+			$(this).parents().siblings(".ipt_text").val(val);
+			$(this).parents().siblings(".ipt_hide").val(id);
 		})
 		$("body").click(function(){
 			$(".boxIpt").children("ul").slideUp();
@@ -123,12 +126,12 @@ class Choice extends React.Component{
 		// 列表初始化加载
 		let url = this.state.url;
 		let that = this;
-		post(url,"",function(res){
-		 	console.log(res)
-		 	that.setState({
-				arr:res
-			})
-		});
+		// post(url,"",function(res){
+		//  	console.log(res)
+		//  	that.setState({
+		// 		arr:res
+		// 	})
+		// });
 	}
 
 	getLoad(){  //模糊搜索
@@ -147,8 +150,14 @@ class Choice extends React.Component{
 	render(){
 		return (
 			<div className="boxIpt" style={{width:this.props.width}}>
-				<img src={require('../../images/qi.jpg')} />
-				<input type="text" ref="val" placeholder={this.props.placeholder} onKeyUp={this.getLoad.bind(this)}/>
+				{	
+					this.props.imgIcon === "qi" ?
+					<img src={require('../../images/qi.jpg')} />
+					:
+					<img src={require('../../images/mu.jpg')} />
+				}
+				<input type="hidden" className="ipt_hide"/>
+				<input type="text" className="ipt_text" ref="val" placeholder={this.props.placeholder} onKeyUp={this.getLoad.bind(this)}/>
 				<ul style={{width:this.props.ulWidth}}>
 					{
 						this.state.arr.map( (item,index)=><li key={index} id={item[this.props.id]} ><span className="fl">{item[this.props.name1]}</span><span className="fr">{item[this.props.name2]}</span></li> )
@@ -159,4 +168,19 @@ class Choice extends React.Component{
 	}
 }
 
-export {Crumbs,Page,Loading,Choice}
+
+let parmesObj = function(){
+	var obj = {};
+	var urlStr = location.hash;
+	var index = urlStr.indexOf("?");
+	urlStr = urlStr.substring(index+1);
+	let arr = urlStr.split("&");
+	arr.forEach(item => {
+		let arr = item.split("=");
+		obj[arr[0]]=arr[1]
+	})
+	return obj;
+}
+
+
+export {Crumbs,Page,Loading,Choice,parmesObj}

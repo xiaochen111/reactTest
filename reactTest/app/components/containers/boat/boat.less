@@ -1,0 +1,134 @@
+@import url(../../public.less);
+
+
+#shipschedule{
+    .topSer{
+        .border(); height: 60px; .mb(10px);.boxsize();padding:15px 10px;
+        button{
+            .buttonStyle(120px, 30px, 3px, @btnblue, #fff);.ml(30px);
+        }
+        .ant-calendar-picker{
+            width: 230px;
+        }
+    }
+
+
+
+	.criteria{
+        .wh(100%,38px);.border(#cad4e2);background: #fff;
+        .allboat{
+            .wh(105px,38px);.lh(38px);.tc();.cur;.fl;
+            &:hover{
+                i.fa-angle-down{transform:rotate(-180deg);transition:all .5s}
+            }
+        }
+        .week{
+            .fl; width: 528px;
+            .check{
+                margin-top: 12px; .fl; margin-right: 26px;width: 528px;
+            }
+        }
+        .sort_tit{.fl;.lh(38px);.ml(58px);}
+        .sort{
+            .fl;
+            li{
+                .fl;.lh(38px); display: inline-block; .mr(34px);.cur;
+                &.selCol{
+                    color: @blue;font-weight: bold;
+                }
+            }
+        }
+        .btns_bg{
+            .fl;.wh(80px,38px);.mt(2px);
+            &.bg1{
+                background:url(../../../images/Shape1.png) no-repeat;
+            }
+            &.bg2{
+               background:url(../../../images/Shape2.png) no-repeat;
+            }
+            span{
+                display: inline-block; .wh(30px,30px);.cur;
+            }
+        }
+    }
+
+    .tableList{
+        .listBox{
+            .wh(100%,auto);.mt(10px);
+            .titList{
+                .wh(100%,38px);.lh(38px);.ft(14px);text-indent: 15px;background: #f0f6ff;.border(#cad4e2);
+            }
+            .ulbox{
+                .wh(100%,95px);.border(#e6e6e6);.mt(-1px);vertical-align: middle;
+                li{
+                    .fl;.lh(95px);box-sizing:border-box;-webkit-box-sizing:border-box;
+                    p{
+                        display: inline-block;vertical-align: middle;line-height: 20px;width: 100%;
+                    }
+                    span{
+                        display: inline-block;width: 100%; .overhide();
+                        &.day{
+                            color: @blue;.ft(14px);
+                        }
+                    }
+                }
+            }
+            .li_1{
+                width: 130px;.tc();
+                img{
+                    .wh(35px,35px);display: inline-block;.border();border-radius: 50%;
+                }
+            }
+            .li_2{width: 425px;.pl(20px);.ft(13px);color:#333;}
+            .li_3{width: 180px;.pl(20px);.ft(13px);color:#333;}
+            .li_4{width: 430px;.pl(20px);.ft(13px);color:#333;}
+        }
+    }
+
+    .li_bj(){
+        .li_1{width: 133px;}
+        .li_2{width: 165px;}
+        .li_3{width: 90px;}
+        .li_4{width: 150px;}
+        .li_5{width: 90px;}
+        .li_6{width: 176px;}
+        .li_7{width: 176px;}
+        .li_8{width: 176px;}
+    }
+    .boxCont{
+        box-shadow:0 0 8px 2px #eaeffd; width: 1200px; height: auto; background: #fff; .mt(10px);box-sizing:border-box;-webkit-box-sizing:border-box; padding: 17px;.fl;
+        ul.thead{
+            background: #fbfbfb;.border(#cad4e2);.fl;
+            .li_bj();
+            li{
+                .fl;.lh(42px); .pl(10px);border-right:1px solid #cad4e2;.ft(14px);box-sizing:border-box;-webkit-box-sizing:border-box;font-weight: bold;
+                &:last-child{
+                    border-right:none ;
+                }
+            }
+        }
+        ul.list{
+            .border(#cad4e2);.mt(-1px);.fl;
+            &:hover{
+                background: #eefafe;
+            }
+            .li_bj();
+            li{
+                .fl;.lh(60px); .pl(10px);border-right:1px solid #cad4e2;box-sizing:border-box;-webkit-box-sizing:border-box;
+                &:last-child{
+                    border-right:none ;
+                }
+                p{
+                    display: inline-block;vertical-align: middle;line-height: 20px;width: 100%;
+                }
+                span{
+                    display: inline-block;width: 100%; .overhide();
+                    &.day{
+                        color: @blue;.ft(14px);
+                    }
+                }
+            }
+        }
+    }
+
+}

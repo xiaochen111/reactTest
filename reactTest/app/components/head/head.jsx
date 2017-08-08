@@ -24,7 +24,8 @@ class App extends Component {
 		            </div>
 
 		            <div className="containers"> {/*中间渲染内容*/}
-						{this.props.children}
+						<div>{this.props.children}</div>
+						<div className="clearfix"></div>
 					</div>
 
 				</div>
@@ -66,8 +67,10 @@ class Topul extends Component{
 			<div>
 				<ul className="t_ul">
 					<li><Link to="/bodyBox">菜单一</Link></li>
-					<li><Link to="/Search">菜单二</Link></li>
+					
+					{/*<li><Link to="/Search">菜单二</Link></li>*/}
 					<li><Link to="/City">菜单三</Link></li>
+					<li><Link to="/boat">船期查询</Link></li>
 					<li><Link to="/Test">测试</Link></li>
 					<li><Link onClick={this.login.bind(this)}>{this.state.name}</Link></li>
 				</ul>
@@ -75,10 +78,6 @@ class Topul extends Component{
 		)
 	}
 }
-
-
-
-
 
 
 export {App} ;

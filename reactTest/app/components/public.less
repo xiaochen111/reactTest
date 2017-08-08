@@ -11,7 +11,7 @@ div:after,ul:after{
 .fr{float: right;}
 .clearfix{clear: both;}
 
-
+@box_shadow:2px 2px 5px #eaeffd inset;
 // 滚动条样式
 /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
 ::-webkit-scrollbar{  
@@ -94,6 +94,10 @@ div:after,ul:after{
 
 .overhide(){
     overflow: hidden;text-overflow: ellipsis; white-space: nowrap;  
+}
+
+.boxsize(){
+  box-sizing:border-box;-webkit-box-sizing:border-box;
 }
 
 
